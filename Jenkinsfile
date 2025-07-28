@@ -5,6 +5,7 @@ pipeline {
        stage('Compile') {
             steps {
                 echo 'Compiling the code'
+                sh 'mvn -f pom.xml clean compile'
             }
         }
        stage('Unit test') {
@@ -14,8 +15,14 @@ pipeline {
         }
        stage('Build and package app') {
             steps {
-                echo 'Building artifact'
+                echo 'mvn -f pom.xml package'
             }
+            post {
+success {
+     echo "Achiving the artifacts"
+     archiveArtifacts artifacts: '**/*.war', followSymlinks: false, onlyIfSuccessful: true
+} 
+}
         }
        stage('Upload artifact') {
             steps {
