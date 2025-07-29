@@ -22,6 +22,7 @@ success {
        stage('Creating docker image') {
             steps {
                 echo 'creating image'
+                sh 'whoami'
                 sh 'docker image build -t harbor.registry.local/mymavenapp:$BUILD_NUMBER .'
             }
         }
