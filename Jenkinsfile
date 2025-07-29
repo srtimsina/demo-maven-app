@@ -8,11 +8,6 @@ pipeline {
                 sh 'mvn -f pom.xml clean compile'
             }
         }
-       stage('Unit test') {
-            steps {
-                echo 'Running unit test'
-            }
-        }
        stage('Build and package app') {
             steps {
                 echo 'mvn -f pom.xml package'
@@ -24,14 +19,10 @@ success {
 } 
 }
         }
-       stage('Upload artifact') {
-            steps {
-                echo 'uploading artifact'
-            }
-        }
        stage('Creating docker image') {
             steps {
                 echo 'creating image'
+                sh 'docker image build -t harbor.registry.local/mymavenapp:$BUILD_NUMBER'
             }
         }
        stage('scan docker image') {
