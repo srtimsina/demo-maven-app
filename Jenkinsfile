@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-    CONTAINER_REGISTRY_AND_REPO="harbor.registry.local/mymavenapp"  
+    CONTAINER_REGISTRY_AND_REPO="mymavenapp"  
 }
 
     stages {
