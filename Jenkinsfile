@@ -31,7 +31,7 @@ success {
        stage('scan docker image') {
             steps {
                 echo 'Scanning docker image'
-               sh 'rivy image --format json --output result.json $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER'
+               sh 'trivy image --format json --output result.json $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER'
             }
         }
        stage('Push docker image to registry') {
