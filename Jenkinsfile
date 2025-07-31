@@ -23,18 +23,27 @@ success {
 }
         }
        stage('Creating docker image') {
+           agent {
+      label 'node-for-mavenapp'
+}
             steps {
                 echo 'creating image'
                 sh 'docker image build -t $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER .'
             }
         }
        stage('scan docker image') {
+agent {
+    label 'node-for-mavenapp'
+}
             steps {
                 echo 'Scanning docker image'
                sh 'trivy image --format json --output result.json --scanners vuln --exit-code 1 --severity HIGH,CRITICAL --ignore-unfixed $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER'
             }
         }
        stage('Push docker image to registry') {
+agent {
+ label 'node-for-mavenapp'
+}
             steps {
                 withDockerRegistry([credentialsId: 'dockerregcred', url: '']) {
 sh 'docker image push $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER'             
