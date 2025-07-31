@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-    CONTAINER_REGISTRY_AND_REPO="mymavenapp"  
+    CONTAINER_REGISTRY_AND_REPO="suryaraj/mymavenapp"  
 }
 
     stages {
