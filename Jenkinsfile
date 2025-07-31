@@ -44,8 +44,15 @@ sh 'docker image push $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER'
        stage('Deploy app to dev env') {
             steps {
                 echo 'Deploying to dev env'
+sh 'docker container run -d --name myapp-dev -p 8088:8080 $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER'
             }
         }
+stage('Deploy to prod env') {
+steps {
+ echo "Deploying to prod. env"
+sh 'docker container run -d --name myapp-prod -p 8089:8080 $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER'
+}
+}
     }
 }
 
