@@ -55,13 +55,14 @@ sh 'docker image push $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER'
 	stage('Deploy to prod env') {
 	   steps {
            timeout(time:1, unit:'DAYS'){
+           input message: 'Are you sure you want to approve prod. deployment?'
+           }
            echo "Deploying to prod. env"
   	   sh '''
 	   docker container stop myapp-prod || true
 	   docker container rm myapp-prod || true
 	   docker container run -d --name myapp-prod -p 8089:8080 $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER
            '''
-}
 }
 }
     }
