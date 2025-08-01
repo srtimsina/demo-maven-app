@@ -77,8 +77,8 @@ sh 'docker image push $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER'
 }
 post {
 always {
-mail to: "devopsuryaraj@gmail.com"
-subject: "Hello DevOps, we are in always post action"
+mail to: "devopsuryaraj@gmail.com",
+subject: "Hello DevOps, we are in always post action",
 body: "Please go through the ${BUILD_URL} and verify the build"
 }
 
