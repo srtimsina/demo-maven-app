@@ -73,7 +73,6 @@ sh 'docker image push $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER'
 	   docker container run -d --name myapp-prod -p 8089:8080 $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER
            '''
 }
-}
     }
 post {
 always {
