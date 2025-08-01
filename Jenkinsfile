@@ -101,5 +101,4 @@ body: "Please go through the ${BUILD_URL} and verify the build"
         }
     }
 }
-}
 
