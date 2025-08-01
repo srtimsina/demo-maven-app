@@ -75,5 +75,31 @@ sh 'docker image push $CONTAINER_REGISTRY_AND_REPO:$BUILD_NUMBER'
 }
 }
     }
+post {
+always {
+mail to: "devopsuryaraj@gmail.com"
+subject: "Hello DevOps, we are in always post action"
+body: "Please go through the ${BUILD_URL} and verify the build"
+}
+
+        success {
+            mail bcc: '', body: """Hi Team,
+            Build #$BUILD_NUMBER is successful, please go through the url
+            $BUILD_URL
+            and verify the details.
+            Regards,
+            DevOps Team""", cc: '', from: '', replyTo: '', subject: 'BUILD SUCCESS NOTIFICATION', to: 'devopsuryaraj@gmail.com'
+        }
+
+        failure {
+                mail bcc: '', body: """Hi Team,
+                Build #$BUILD_NUMBER is unsuccessful, please go through the url
+                $BUILD_URL
+                and verify the details.
+                Regards,
+                DevOps Team""", cc: '', from: '', replyTo: '', subject: 'BUILD FAILED NOTIFICATION', to: 'devopsuryaraj@gmail.com'
+        }
+    }
+}
 }
 
